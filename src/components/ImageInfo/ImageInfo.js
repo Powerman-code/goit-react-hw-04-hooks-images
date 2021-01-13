@@ -14,7 +14,7 @@ const Status = {
 };
 
 export default function ImageInfo({ searchQuerry }) {
-  const [images, setImages] = useState(null);
+  const [images, setImages] = useState([]);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [status, setStatus] = useState(Status.IDLE);
@@ -29,29 +29,29 @@ export default function ImageInfo({ searchQuerry }) {
     console.log(searchQuerry);
     console.log(images);
 
-    setStatus(status.PENDING);
+    setStatus(Status.PENDING);
     console.log(status);
 
     api
       .fetchImage(searchQuerry, page)
       .then(({ hits }) => {
         console.log(hits);
-        setImages((prevState) => [...prevState.images, ...hits]);
-        setStatus(status.RESOLVED);
+        setImages((prevState) => [...prevState, ...hits]);
+        setStatus(Status.RESOLVED);
         console.log(status);
         console.log(images);
       })
       .catch((error) => {
         setError(error);
-        setStatus(status.REJECTED);
+        setStatus(Status.REJECTED);
         console.log(status);
       });
-  }, [page, images, status, searchQuerry]);
+  }, [page, searchQuerry]);
 
   console.log(images);
 
   const onLoadMore = () => {
-    setPage((prevState) => prevState.page + 1);
+    setPage((prevState) => prevState + 1);
   };
 
   if (status === Status.IDLE) {
