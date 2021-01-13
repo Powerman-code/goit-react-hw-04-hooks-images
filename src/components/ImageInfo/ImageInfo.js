@@ -36,7 +36,7 @@ export default function ImageInfo({ searchQuerry }) {
       .fetchImage(searchQuerry, page)
       .then(({ hits }) => {
         console.log(hits);
-        setImages([1, 2, 3], [4, 5]);
+        setImages((prevState) => [...prevState.images, ...hits]);
         setStatus(status.RESOLVED);
         console.log(status);
         console.log(images);
