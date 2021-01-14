@@ -41,7 +41,9 @@ export default function ImageInfo({ searchQuerry }) {
         // console.log(hits);
         // console.log(hits.length);
         else {
-          return Promise.reject(new Error("msg"));
+          return Promise.reject(
+            new Error("Sorry, the requested information was not found")
+          );
         }
       })
       .catch((error) => {
