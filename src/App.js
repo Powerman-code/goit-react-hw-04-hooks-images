@@ -6,17 +6,9 @@ import "./App.css";
 
 export default function App() {
   const [searchQuerry, setSearchQuerry] = useState("");
-  // const [images, setImages] = useState([]);
-  // const [error, setError] = useState(null);
-  // state = {
-  //   searchQuerry: '',
-  //   images: [],
-  //   error: null,
-  // };
 
   const onSubmit = (data) => {
     setSearchQuerry(data);
-    console.log(data);
   };
 
   return (

@@ -22,33 +22,33 @@ export default function ImageInfo({ searchQuerry }) {
   console.log(searchQuerry);
 
   useEffect(() => {
+    setImages([]);
+  }, [searchQuerry]);
+
+  useEffect(() => {
     if (!searchQuerry) {
-      console.log(images);
       return;
     }
-    console.log(searchQuerry);
-    console.log(images);
-
     setStatus(Status.PENDING);
-    console.log(status);
 
     api
       .fetchImage(searchQuerry, page)
       .then(({ hits }) => {
-        console.log(hits);
-        setImages((prevState) => [...prevState, ...hits]);
-        setStatus(Status.RESOLVED);
-        console.log(status);
-        console.log(images);
+        if (hits.length !== 0) {
+          setImages((prevState) => [...prevState, ...hits]);
+          setStatus(Status.RESOLVED);
+        }
+        // console.log(hits);
+        // console.log(hits.length);
+        else {
+          return Promise.reject(new Error("msg"));
+        }
       })
       .catch((error) => {
         setError(error);
         setStatus(Status.REJECTED);
-        console.log(status);
       });
   }, [page, searchQuerry]);
-
-  console.log(images);
 
   const onLoadMore = () => {
     setPage((prevState) => prevState + 1);
@@ -79,6 +79,25 @@ export default function ImageInfo({ searchQuerry }) {
 ImageInfo.propTypes = {
   searchQuerry: PropTypes.string.isRequired,
 };
+
+// useEffect(() => {
+//   if (!searchQuerry) {
+//     return;
+//   }
+//   setStatus(Status.PENDING);
+
+//   api
+//     .fetchImage(searchQuerry, page)
+//     .then(({ hits }) => {
+//       // console.log(hits);
+//       setImages((prevState) => [...prevState, ...hits]);
+//       setStatus(Status.RESOLVED);
+//     })
+//     .catch((error) => {
+//       setError(error);
+//       setStatus(Status.REJECTED);
+//     });
+// }, [page, searchQuerry]);
 
 // import { Component } from 'react';
 // import api from '../Image-api/images-api';
