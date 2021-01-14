@@ -1,29 +1,55 @@
-import { Component } from 'react';
-import PropTypes from 'prop-types';
-import s from './Button.module.css';
+// import { Component } from "react";
+import PropTypes from "prop-types";
+import s from "./Button.module.css";
 
-class Button extends Component {
-  scroll = () => {
-    this.props.onClick();
+export default function Button({ onClick }) {
+  const scroll = () => {
+    onClick();
     setTimeout(() => {
       window.scrollBy({
         top: document.documentElement.clientHeight - 130,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
     }, 500);
   };
 
-  render() {
-    return (
-      <button type="button" onClick={this.scroll} className={s.Button}>
-        Load more
-      </button>
-    );
-  }
+  return (
+    <button type="button" onClick={scroll} className={s.Button}>
+      Load more
+    </button>
+  );
 }
 
 Button.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
 
-export default Button;
+// import { Component } from 'react';
+// import PropTypes from 'prop-types';
+// import s from './Button.module.css';
+
+// class Button extends Component {
+//   scroll = () => {
+//     this.props.onClick();
+//     setTimeout(() => {
+//       window.scrollBy({
+//         top: document.documentElement.clientHeight - 130,
+//         behavior: 'smooth',
+//       });
+//     }, 500);
+//   };
+
+//   render() {
+//     return (
+//       <button type="button" onClick={this.scroll} className={s.Button}>
+//         Load more
+//       </button>
+//     );
+//   }
+// }
+
+// Button.propTypes = {
+//   onClick: PropTypes.func.isRequired,
+// };
+
+// export default Button;

@@ -2,7 +2,7 @@ import errorImage from "../404_error.jpg";
 import PropTypes from "prop-types";
 
 export default function ImageErrorView({ message }) {
-  console.log(message);
+  // console.log(message);
   return (
     <div role="alert">
       <img src={errorImage} width="400" alt="girl-and-boy-not-found" />

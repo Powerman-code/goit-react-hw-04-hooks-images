@@ -37,10 +37,7 @@ export default function ImageInfo({ searchQuerry }) {
         if (hits.length !== 0) {
           setImages((prevState) => [...prevState, ...hits]);
           setStatus(Status.RESOLVED);
-        }
-        // console.log(hits);
-        // console.log(hits.length);
-        else {
+        } else {
           return Promise.reject(
             new Error("Sorry, the requested information was not found")
           );
@@ -65,7 +62,7 @@ export default function ImageInfo({ searchQuerry }) {
   }
 
   if (status === Status.REJECTED) {
-    return <ImageErrorView message={error} />;
+    return <ImageErrorView message={error.message} />;
   }
 
   if (status === Status.RESOLVED) {
